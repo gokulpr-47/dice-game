@@ -1,42 +1,51 @@
 import React from 'react';
 
-class Game extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			aiwin: 0,
-			youwin: 0,
-			draw: 0,
-		}
-	}
-
-	check(){
-		if(this.props.aiScore > this.props.yourScore){
-			this.setState({
-				aiwin : this.state.aiwin + 1
-			})
-		}
-		else if(this.props.aiScore > this.props.yourScore){
-			this.setState({
-				youwin : this.state.youwin + 1
-			})
-		}
-		else{
-			this.setState({
-				draw : this.state.draw + 1
-			})
-		}
-	}
-
-	render(){
+export const Game = props => {
+	if(props.yourScore > props.aiScore){
+		props.you.push(1);
 		return(
-			<div>
-				<div>You : {this.state.youwin}</div>
-				<div>AI : {this.state.aiwin}</div>
-				<div>Draw : {this.state.draw}</div>
+			<div className="Game">
+				{console.log("entered")}
+				<div>You: {props.you.length/2}</div>
+				<div>Ai: {props.ai.length/2}</div>
+				<div>Draw: {props.draw.length/2}</div>
 			</div>
-		)
+		);
+	}
+
+	else if(props.yourScore < props.aiScore){
+		props.ai.push(1);
+		return(
+			<div className="Game">
+				<div>You: {props.you.length/2}</div>
+				<div>Ai: {props.ai.length/2}</div>
+				<div>Draw: {props.draw.length/2}</div>
+			</div>
+		);
+	}
+
+	else if(props.yourScore === props.aiScore && props.yourScore !== 0 && props.aiScore !== 0){
+		props.draw.push(1);
+		return(	
+			<div className="Game">
+				<div>You: {props.you.length/2}</div>
+				<div>Ai: {props.ai.length/2}</div>
+				<div>Draw: {props.draw.length/2}</div>
+			</div>
+		);
+	}
+
+	else if (props.yourScore === 0 && props.aiScore === 0) {
+	    return (
+	      	<div className="Game">
+				<div>You: {props.you.length/2}</div>
+				<div>Ai: {props.ai.length/2}</div>
+				<div>Draw: {props.draw.length/2}</div>
+			</div>
+	    );
+	}
+
+	else{
+		return null;
 	}
 }
-
-export default Game
